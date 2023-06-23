@@ -140,6 +140,7 @@
 
                         var totalPrice = $('#jumlah').val() != null ? data.item.price * $('#jumlah').val() : data.item.price;
                         $('#finalTotal').val(totalPrice);
+
                         $("#jumlah").keyup(function() {
                             var x = Number(harga);
                             var y = Number($("#jumlah").val());
