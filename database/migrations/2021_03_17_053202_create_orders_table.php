@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity');
             $table->integer('order_status');
             $table->string('customer_name');
+            $table->date('date');
             $table->timestamps();
         });
     }

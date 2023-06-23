@@ -43,6 +43,15 @@ Route::prefix('/product')->group(function () {
     Route::get('delete/{id}',[ProductController::class,'destroy'])->name('destroy.product');
 });
 
+Route::prefix('/order')->group(function () {
+    Route::get('/',[OrderController::class,'index'])->name('all.order');
+    Route::get('add',[OrderController::class,'create'])->name('create.order');
+    Route::post('add',[OrderController::class,'store'])->name('store.order');
+    Route::get('update/{id}',[OrderController::class,'edit'])->name('edit.order');
+    Route::put('update/{id}',[OrderController::class,'update'])->name('update.order');
+    Route::get('delete/{id}',[OrderController::class,'destroy'])->name('destroy.order');
+});
+
 // Route::get('/add-product', [ProductController::class,'formData'])->middleware(['auth'])->name('add.product');
 
 // Route::post('/insert-product',[ProductController::class,'store'])->middleware(['auth']);
@@ -87,19 +96,19 @@ Route::get('/sold-products',[InvoiceController::class,'soldProducts'])->middlewa
 
 
 //order
-Route::get('/add-order/{name}', [ProductController::class,'formData'])->middleware(['auth'])->name('add.order');
+// Route::get('/add-order/{name}', [OrderController::class,'newFormData'])->middleware(['auth'])->name('add.order');
 
-Route::post('/insert-order',[OrderController::class,'store'])->middleware(['auth']);
+// Route::post('/insert-order',[OrderController::class,'store'])->middleware(['auth']);
 
-Route::get('/all-orders',[OrderController::class,'ordersData'])->middleware(['auth'])->name('all.orders');
+// Route::get('/all-orders',[OrderController::class,'ordersData'])->middleware(['auth'])->name('all.orders');
 
-Route::get('/pending-orders',[OrderController::class,'pendingOrders'])->middleware(['auth'])->name('pending.orders');
+// Route::get('/pending-orders',[OrderController::class,'pendingOrders'])->middleware(['auth'])->name('pending.orders');
 
-Route::get('/delivered-orders',[OrderController::class,'deliveredOrders'])->middleware(['auth'])->name('delivered.orders');
+// Route::get('/delivered-orders',[OrderController::class,'deliveredOrders'])->middleware(['auth'])->name('delivered.orders');
 
-Route::get('/new-order', [OrderController::class,'newformData'])->middleware(['auth'])->name('new.order');
+// Route::get('/new-order', [OrderController::class,'newformData'])->middleware(['auth'])->name('new.order');
 
-Route::post('/insert-new-order',[OrderController::class,'newStore'])->middleware(['auth']);
+// Route::post('/insert-new-order',[OrderController::class,'newStore'])->middleware(['auth']);
 
 
 //customer

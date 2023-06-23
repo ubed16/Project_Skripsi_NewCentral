@@ -86,12 +86,12 @@ Products<!DOCTYPE html>
                             </a>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('new.order')}}">Input Barang Keluar</a>
+                                    <a class="nav-link" href="{{ route('create.order')}}">Input Barang Keluar</a>
                                 </nav>
                             </div>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('all.orders')}}">Stok Barang</a>
+                                    <a class="nav-link" href="{{ route('all.order')}}">Stok Barang</a>
                                 </nav>
                             </div>
 
