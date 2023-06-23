@@ -88,11 +88,11 @@
                                     </div>
 
                                     <!-- <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputLastName">Gallery</label>
-                                                        <input name="photo" type="file" />
-                                                    </div>
-                                                </div> -->
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Gallery</label>
+                                                    <input name="photo" type="file" />
+                                                </div>
+                                            </div> -->
                                 </div>
 
                                 <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block">Submit</button>

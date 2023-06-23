@@ -8,7 +8,7 @@ use App\Models\Item;
 
 class ItemApiController extends Controller
 {
-    public function getMaster(Request $r)
+    public function getItem(Request $r)
     {
         $item = Item::find($r->id);
         return response()->json([

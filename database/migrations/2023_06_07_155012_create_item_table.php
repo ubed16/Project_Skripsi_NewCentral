@@ -17,7 +17,7 @@ class CreateItemTable extends Migration
             $table->id();
             $table->string('product_code')->unique();
             $table->string('size');
-            $table->integer('quantity')->nullable();
+            $table->integer('quantity')->default(0);
             $table->string('type');
             $table->integer('price');
             $table->timestamps();
