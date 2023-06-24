@@ -67,7 +67,7 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
 
-        return view(Admin.edit_item, compact($item));
+        return view('Admin.edit_item', compact($item));
     }
 
     /**

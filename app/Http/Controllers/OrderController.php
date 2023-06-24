@@ -84,7 +84,8 @@ class OrderController extends Controller
         $order = Order::find($id);
         $items = Item::where('quantity', '>', 0)->get();
         $customers = Customer::all();
-        return view('Admin.edit_order', compact(['order', 'items', 'customers']));
+        $cus = Customer::where('email',$order->email)->first();
+        return view('Admin.edit_order', compact(['order', 'items', 'customers', 'cus']));
     }
 
     /**
@@ -102,6 +103,7 @@ class OrderController extends Controller
         $item = Item::where('id', $request->item_code)->first();
         $tempStock = Order::where('product_code', $order->product_code)->sum('quantity');
 
+        // dd($item);
         $order->email = $customer->email;
         $order->product_code = $item->product_code;
         $order->product_name = $request->size;
@@ -165,6 +167,13 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+
+        $item = Item::where('product_code', $order->product_code)->first();
+        $item->quantity = $item->quantity + $order->stock;
+        $item->save();
+
+        $order->delete();
+        return redirect()->route('all.product')->with('success', 'Data Berhasil Terhapus');
     }
 }

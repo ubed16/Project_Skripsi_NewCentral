@@ -10,7 +10,7 @@
                             <h3 class="text-center font-weight-light my-4">Input Barang Keluar</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('update.order') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('update.order', $order->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">
@@ -28,34 +28,34 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="email">
                                             <label class="small mb-1" for="inputFirstName">Email</label>
-                                            <input class="form-control py-4" name="email" type="text" value="{{ old('email') ?? $order->email }}" readonly/>
+                                            <input class="form-control py-4" name="email" type="text" value="{{ old('email') ?? $cus->email }}" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="company">
                                             <label class="small mb-1" for="inputLastName">Perusahaan</label>
-                                            <input class="form-control py-4" name="company" type="text" value="{{ old('company') ?? $order->customer_name }}"  readonly/>
+                                            <input class="form-control py-4" name="company" type="text" value="{{ old('company') ?? $cus->name }}"  readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="address">
                                             <label class="small mb-1" for="inputState">Alamat</label>
-                                            <input class="form-control py-4" name="address" type="text" value="{{ old('addrress') }}" readonly/>
+                                            <input class="form-control py-4" name="address" type="text" value="{{ old('addrress') ?? $cus->address }}" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="phone">
                                             <label class="small mb-1" for="inputState">No.Hp</label>
-                                            <input class="form-control py-4" name="phone" type="text" value="{{ old('phone') }}" readonly/>
+                                            <input class="form-control py-4" name="phone" type="text" value="{{ old('phone') ?? $cus->phone}}" readonly/>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="code">Kode Produk</label>
-                                            <select id="code" name="code" class="form-control">
+                                            <select id="code" name="item_code" class="form-control">
                                                 @foreach ($items as $row)
-                                                    <option value="{{ $row->id }}" {{ $row->product_code == $items->product_code ? 'selected' : '' }}>{{ $row->product_code }}</option>
+                                                    <option value="{{ $row->id }}" {{ $row->product_code == $order->product_code ? 'selected' : '' }}>{{ $row->product_code }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -100,7 +100,7 @@
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputLastName">Total Harga</label>
                                             <input class="form-control py-4" name="harga" id="total_price" type="text" /
-                                                value="{{ old(harga) ?? $order->total_price }}" type="text"/ readonly>
+                                                value="{{ old('harga') ?? $order->total_price }}" type="text"/ readonly>
                                         </div>
                                     </div>
 
