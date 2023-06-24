@@ -47,29 +47,19 @@ class OrderController extends Controller
         $data->email = $customer->email;
         $data->product_code = $item->product_code;
         $data->product_name = $request->size;
+        $data->type = $request->item_type;
         $data->quantity = $request->quantity;
+        $data->total_price = $request->harga;
         $data->order_status = 0;
         $data->customer_name = $customer->company;
         $data->date = $request->tgl;
         $data->save();
 
-        //customer_track
-        // $customer = Customer::where('email', '=', $request->email)->first();
-        // if($customer === null){
-        //     $data3=new Customer;
-        //     $data3->name= $request->name;
-        //     $data3->email= $request->email;
-        //     $data3->company = $request->company;
-        //     $data3->address = $request->address;
-        //     $data3->phone = $request->phone;
-        //     $data3->save();
-        // }
-
         $item = Item::where('id', $request->code)->first();
         $item->quantity = $item->quantity - $request->quantity;
         $item->save();
 
-        return Redirect()->back()->with('success', 'Data Berhasil Di Simpan');
+        return redirect()->back()->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -115,7 +105,9 @@ class OrderController extends Controller
         $order->email = $customer->email;
         $order->product_code = $item->product_code;
         $order->product_name = $request->size;
+        $order->type = $request->item_type;
         $order->quantity = $request->quantity;
+        $order->total_price = $request->harga;
         $order->order_status = 0;
         $order->customer_name = $customer->company;
         $order->date = $request->tgl;

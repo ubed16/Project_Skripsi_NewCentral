@@ -11,6 +11,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Customer</th>
+                        <th>Email</th>
                         <th>Kode Barang</th>
                         <th>ukuran Barang</th>
                         <th>Jenis</th>
@@ -29,12 +31,20 @@
                     @foreach($orders as $row)
                     <tr>
                         <td>{{ $row->id }}</td>
-                        <td>{{ $row->product_code }}</td>
-                        <td>{{ $row->product_name }}</td>
                         <td>{{ $row->customer_name }}</td>
                         <td>{{ $row->email }}</td>
+                        <td>{{ $row->product_code }}</td>
+                        <td>{{ $row->product_name }}</td>
+                        <td>{{ $row->type }}</td>
                         <td>{{ $row->quantity }}</td>
-
+                        <td>{{ $row->total_price * $row->quantity }}</td>
+                        <td>{{ $row->total_price }}</td>
+                        <td>{{ date('d-m-Y', strtotime($row->date)) }}</td>
+                        <td>
+                            <a href="{{ route('edit.order', $row->id) }}" class="btn btn-sm btn-info">Edit</a>
+                            <a href="{{ route('destroy.order', $row->id) }} "
+                                class="btn btn-sm btn-danger">Delete</a>
+                        </td>
 
 
                         {{-- <td>

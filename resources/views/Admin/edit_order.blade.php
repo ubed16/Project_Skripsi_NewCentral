@@ -10,16 +10,16 @@
                             <h3 class="text-center font-weight-light my-4">Input Barang Keluar</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('store.order') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('update.order') }}" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputFirstName">Customer</label>
                                             <select id="name" name="id_customer" class="form-control">
-                                                <option selected>Pilih Customer</option>
                                                 @foreach ($customers as $c)
-                                                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                                    <option value="{{ $c->id }}" {{ $c->email == $order->email ? 'selected' : ''}}>{{ $c->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -28,25 +28,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="email">
                                             <label class="small mb-1" for="inputFirstName">Email</label>
-                                            <input class="form-control py-4" name="email" type="text" readonly/>
+                                            <input class="form-control py-4" name="email" type="text" value="{{ old('email') ?? $order->email }}" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="company">
                                             <label class="small mb-1" for="inputLastName">Perusahaan</label>
-                                            <input class="form-control py-4" name="company" type="text"  readonly/>
+                                            <input class="form-control py-4" name="company" type="text" value="{{ old('company') ?? $order->customer_name }}"  readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="address">
                                             <label class="small mb-1" for="inputState">Alamat</label>
-                                            <input class="form-control py-4" name="address" type="text" readonly/>
+                                            <input class="form-control py-4" name="address" type="text" value="{{ old('addrress') }}" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="phone">
                                             <label class="small mb-1" for="inputState">No.Hp</label>
-                                            <input class="form-control py-4" name="phone" type="text" readonly/>
+                                            <input class="form-control py-4" name="phone" type="text" value="{{ old('phone') }}" readonly/>
                                         </div>
                                     </div>
 
@@ -54,9 +54,8 @@
                                         <div class="form-group">
                                             <label class="small mb-1" for="code">Kode Produk</label>
                                             <select id="code" name="code" class="form-control">
-                                                <option selected>Masukan kode</option>
                                                 @foreach ($items as $row)
-                                                    <option value="{{ $row->id }}">{{ $row->product_code }}</option>
+                                                    <option value="{{ $row->id }}" {{ $row->product_code == $items->product_code ? 'selected' : '' }}>{{ $row->product_code }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -64,7 +63,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="ukuran">
                                             <label class="small mb-1" for="inputState">ukuran Produk</label>
-                                            <input class="form-control py-4" name="size" type="text" / value=""
+                                            <input class="form-control py-4" name="size" type="text" / value="{{ old('size') ?? $order->product_name }}"
                                                 type="text"/ readonly>
 
                                         </div>
@@ -72,7 +71,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="jenis">
                                             <label class="small mb-1" for="inputLastName">Jenis</label>
-                                            <input class="form-control py-4" name="item_type" type="text" / value=""
+                                            <input class="form-control py-4" name="item_type" type="text" / value="{{ old('item_type') ?? $order->type }}"
                                                 type="text"/ readonly>
                                         </div>
                                     </div>
@@ -80,20 +79,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputLastName">Quantity</label>
-                                            <input class="form-control py-4" name="quantity" id="qty" type="text">
+                                            <input class="form-control py-4" name="quantity" id="qty" value="{{ old('quantity') ?? $order->quantity }}" type="text">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="price">
                                             <label class="small mb-1" for="inputLastName">Harga per box</label>
-                                            <input class="form-control py-4" name="harga" type="text" / value=""
+                                            <input class="form-control py-4" name="harga_item" type="text" / value="{{ old('harga_item') ?? $order->total_price / $order->quantity }}"
                                                 type="text"/ readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputLastName">Tanggal</label>
-                                            <input class="form-control py-4" name="tgl" type="date"
+                                            <input class="form-control py-4" name="tgl" value="{{ old('tgl') ?? $order->date }}" type="date"
                                                 placeholder="" />
                                         </div>
                                     </div>
@@ -101,7 +100,7 @@
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputLastName">Total Harga</label>
                                             <input class="form-control py-4" name="harga" id="total_price" type="text" /
-                                                value="" type="text"/ readonly>
+                                                value="{{ old(harga) ?? $order->total_price }}" type="text"/ readonly>
                                         </div>
                                     </div>
 
@@ -207,6 +206,8 @@
                         $("#price").append(x);
 
                         var harga = data.item.price;
+                        var totalPrice = $('#qty').val() != null ? data.item.price * $('#qty').val() : data.item.price;
+                        $('#total_price').val(totalPrice);
 
                         $("#qty").keyup(function() {
 

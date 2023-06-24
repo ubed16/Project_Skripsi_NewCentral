@@ -86,7 +86,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" id="price">
                                             <label class="small mb-1" for="inputLastName">Harga per box</label>
-                                            <input class="form-control py-4" name="harga" type="text" / value=""
+                                            <input class="form-control py-4" name="harga_item" type="text" / value=""
                                                 type="text"/ readonly>
                                         </div>
                                     </div>
@@ -227,4 +227,5 @@
             });
         }
     </script>
+    @include('sweetalert::alert')
 @endsection

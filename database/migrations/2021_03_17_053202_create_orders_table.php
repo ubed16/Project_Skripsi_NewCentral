@@ -18,7 +18,9 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('product_code');
             $table->string('product_name');
+            $table->string('type');
             $table->integer('quantity');
+            $table->integer('total_price');
             $table->integer('order_status');
             $table->string('customer_name');
             $table->date('date');
